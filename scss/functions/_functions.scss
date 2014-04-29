@@ -1,0 +1,37 @@
+$pixelBase : 14; /* 1 */
+
+@function parseInt($n) {
+	@return $n / ($n * 0 + 1); /* 2 */
+}
+
+
+
+@function u($values){ /* 3 */
+
+      $list: (); /* 4 */
+
+      @each $value in $values { /* 5 */
+
+
+            @if $value == 0 or type-of($value) != "number" {
+                  $list: append($list, $value);
+            }
+
+            @else if ($px-only) and (unit($value) == 'rem') { /* 7 */
+                  $list: append($list, (parseInt($value) * $pixelBase) + px); /* 7 */
+            }
+
+            @else if(unit($value) == 'px') or (unit($value) == 'rem'){ /* 8 */
+                  $list: append($list, $value); /* 8 */
+            }
+
+            @else {
+                  $unit: unit($value);
+                  @warn 'There is no unit conversion for #{$unit}'; /* 9 */
+            }
+
+      }
+
+      @return $list(); /* 10 */
+
+}

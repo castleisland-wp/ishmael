@@ -1,0 +1,743 @@
+$px-only: false;
+
+@import "susy";
+@import "breakpoint";
+@import "compass";
+@import "functions/*";
+@import "partials/**/*";
+
+* {
+	font: {
+		family: $bodyfont;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font: {
+		family: $headingfont;
+	}	
+}
+
+@each $element, $size in (h1: 1.5em, h2: 1.33em, h3: 1.25em, h4: 1em) {
+	#{$element} {
+		font-size: $size;
+	}
+}
+
+@include anchors($link, $hover, $visited);
+
+blockquote {
+	font-family: $monofont;
+	cite {
+		font-family: $bodyfont;
+		display:block;
+		text-align: right;
+		&:before {
+			content: '\2014';
+		}
+	}
+}
+
+@include hide-home;
+.page, .archive, .single {
+	@include hide-second-level-same;	
+}
+
+#content, .site-branding, #colophon {
+	@include container(95%);
+}
+
+#masthead {
+	margin-bottom: 1em;
+	.site-branding {
+		padding: 2.5em 0 1em;
+		h1, h2 {
+			text-align: right;
+			a {
+				&:hover {
+					text-decoration: none;
+					@include single-text-shadow($hoff: 3px, $voff: 4px, $blur: 6px, $color: $shadowcolor);
+				}
+			}
+		}
+		.site-title {
+			font-size: 1.75em;
+			font-weight: $titleweight;
+		}
+
+
+	}
+	#site-navigation {
+		@include menu(8.5em, $basecolor, #111, $menu1, $menu2, #eee, #fff, 0.5em, 2.5em);
+		@include double-gradient($basecolor, $shadowcolor);
+		@include menu-has-child;
+		@include border-top-bottom(1px, solid, #111);
+	}
+}
+
+#colophon {
+	.site-info {
+		@include container(75%);
+		background-color: $basecolor;
+		text-align: center;
+		padding: 0 1em;
+	}
+}
+
+@include widget-lists;
+
+.widget_calendar {
+	@include widget-calendar($calendar1, $calendar2, white, $calendar2, white, 1.5em, .1em);
+	table {
+		border: 1px solid black;
+		@include drop-shadow(5px, 5px, 7px, #666);
+		tbody {
+			td {
+				a {
+					font-weight: bold;
+					color: $calendar2;
+				}
+			}
+		}
+	}
+}
+
+.search-field {
+	width: 66%;
+}
+
+.entry-title, .site-title {
+	a {
+		color: $titlecolor;
+	}
+}
+
+.single {
+	#masthead {
+		.site-branding {
+			padding-top: 0;
+			.site-description {
+				display:none;
+			}
+		}
+	}
+	h1.entry-title {
+		font: {
+			size: 2em;
+			weight: $titleweight;
+		}
+	}
+	h2.entry-title {
+		font: {
+			size: 1.75em;
+		}
+		text-align: right;
+		border-bottom: 1px dotted #333;
+	}
+	.entry-content {
+		> p {
+			text-indent: 2em;
+			font-size: 1.25em;
+			line-height: 1.9em;
+			margin-bottom: 0;
+		}
+
+		h1, h2, h3 {
+			border-bottom: 1px dotted #999;
+			margin-top: 1em;
+		}
+		p.author_byline {
+			text-indent: 0;
+			text-align: right;
+			margin: 1.8em 0 2.5em;
+			letter-spacing: 0.1em;
+			font-size: 133%;
+			&:before {
+				content: '\2014 \0020';
+			}
+		}
+	}
+	#post_thumbnail {
+		display: none;
+	}
+	.entry-meta {
+		font-family: $monofont;
+		span a time {
+			font-family: $monofont;
+		}
+		border-bottom: 1px solid #000;
+	}
+}
+
+article {
+	.entry-content {
+		> p {
+			margin-bottom: 0.8em;
+		}
+	}
+}
+
+.comment-list {
+	list-style-type: none;
+	ul, ol {
+		list-style-type: none;
+	}
+	.comment {
+		@include border-radius(12px);
+		padding: 1em;
+		margin-bottom: 1em;
+		border: 1px solid black;
+		.comment-content {
+			margin-left: 1.5em;
+		}
+	}
+	.even {
+		background-color: $basecolor;
+	}
+
+	.odd {
+		background-color: $calendar1;
+	}
+
+	.bypostauthor {
+		@include drop-shadow($color: #777, $blur: 10px);
+		border: 2px solid black;
+	}
+
+	.bypostauthor.even {
+		@include double-gradient($basecolor, darken($basecolor, 10), left);
+	}
+
+	.bypostauthor.odd {
+		@include double-gradient($calendar1, darken($calendar1, 10), left);
+	}
+}
+	
+.plm_calendar_year {
+	font: {
+		weight: bold;
+		size: 150%;
+	}
+}
+
+.holiday_table {
+
+	thead {
+		background-color: #333;
+		tr th {
+		color: #eee;
+		}
+		tr {
+			th {
+				padding: .2em 1em .1em;
+				&:nth-of-type(2) {
+					text-align: right;
+				}
+			}
+		}
+	}
+	tbody {
+		tr {
+			td {
+				padding: .1em 1em 0;
+				&:nth-of-type(2) {
+					text-align: right;
+				}
+			}
+			&:nth-of-type(odd) {
+				td {
+					border-bottom: 1px dotted #999;
+				}
+			}
+			&:nth-of-type(even) {
+				td {
+					border-bottom: 1px solid #999;
+				}
+			}
+			&:last-of-type {
+				td {
+					border-bottom: 3px solid black;
+				}
+			}
+		}
+	}
+}
+
+.widget_plm_holiday_list_widget {
+	dl dd {
+		margin-bottom: 0.667em;
+	}
+}
+
+.plm_calendar_container {
+	> .plm_calendar_month {
+
+		table {
+			margin: {
+				bottom: 1em;
+
+			}
+			background-color: darken($calendar1, 10);
+			caption {
+				font: {
+					size: 110%;
+					weight: bold;
+				}
+			}
+			thead th, tbody td {
+				padding: 1px 3px;
+				text-align: right;
+			}
+
+			thead {
+				background-color: $calendar2;
+				th {
+					font-weight: bold;
+					color: $calendar1;
+				}
+			}
+
+			tbody {
+				tr {
+					&:nth-of-type(even) {
+						background-color: $calendar1;
+						.plm_calendar_pad.last {
+							@include double-gradient($color1: white, $color2: $calendar1, $dir: right);
+						}
+					}
+					&:nth-of-type(odd) {
+						.plm_calendar_pad.last {
+							@include double-gradient($color1: white, $color2: darken($calendar1, 10), $dir: right);
+						}
+					}
+					.plm_calendar_pad.first {
+						@include double-gradient($color1: white, $color2: darken($calendar1, 10), $dir: left);
+					}
+
+					td {
+						border: {
+							right: thin solid black;
+							bottom: thin solid black;
+						}
+						&:first-child{
+							border-left: thin solid black;
+						}
+					}
+
+					.holiday {
+						background-color: $calendar2;
+						span {
+							font-weight: normal;
+							color: white;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.left {
+	float: left;
+	margin: 1em 2em 1em 0;
+}
+
+.right {
+	float: right;
+	margin: 1em 0 1em 2em;
+}
+
+.insert {
+	@include border-radius(.75em);
+	@include box-shadow(4px 4px 6px 0 #888);
+	font-size: 133%;
+	line-height: 133%;
+	padding: 1.25em;
+	width: 45%;
+}
+
+.warning {
+	@extend .insert;
+	background-color: #FFE9E9;
+	border: 2px solid #808080;
+	color: #3F2222;
+}
+
+.highlight {
+	@extend .insert;
+	background-color: #EFFFEF;
+	border: 1px solid black;
+}
+
+.neutral {
+	@extend .insert;
+	background-color: #eee;
+}
+
+$pstack1: green;
+$pstack2: mix(green, yellow);
+$pstack3: yellow;
+$pstack4: mix(yellow, red);
+$pstack5: red;
+
+.plm_rating_stack_container {
+	float: none;
+	@include border-left-radius(1em);
+	@include border-right-radius(0.5em);
+	padding: 1em;
+	border: 5px solid #f0f0ff;
+	width: 140px;
+	@include box-shadow(3px 3px 5px 0 #666 inset, 20px 24px 36px 0 #ccc);
+	background-color: #fafafa;
+	.plm_stack_label {
+		color: $calendar2;
+		font-weight: bold;
+	}
+	.plm_stack_rating .plm_rated {
+		@include text-shadow(2px 2px 4px 0 #666);
+		@each $child, $color in (1: $pstack1, 2: $pstack2, 3: $pstack3, 4: $pstack4, 5: $pstack5) {
+			&:nth-of-type(#{$child}) {
+				color: $color;
+			}
+		}
+	}
+}
+
+$ptable1: #663333;
+$ptable5: red;
+$ptable3: mix($ptable1, $ptable5);
+$ptable2: mix($ptable1, $ptable3);
+$ptable4: mix($ptable3, $ptable5);
+
+
+.plm_rating_table_container {
+	float: none;
+	table tbody tr td {
+		.plm_rated {
+			@each $child, $color in (1: $ptable1, 2: $ptable2, 3: $ptable3, 4: $ptable4, 5: $ptable5) {
+				&:nth-of-type(#{$child}) {
+					color: $color;
+				}
+			}
+		}
+	}
+}
+
+.home, .archive {
+	.plm_rating_table_container, .plm_rating_stack_container {
+		display: none;
+	}
+}
+
+.plm_star_rating .plm_filler {
+	color: #ccc;
+}
+
+@include breakpoint($medium-layout) {
+	#colophon, .site-branding
+	{
+		@include container(90%);
+	}
+
+	#content {
+		@include container(700px);
+	}
+
+	#primary {
+		@include span(7 at 6);
+	}
+
+	#secondary-1, #secondary-2 {
+		clear:left;
+		@include span(5);
+	}
+	#masthead {
+		.site-branding{
+			.site-title {
+				font-size: 2.3em;
+			}
+		}
+		#site-navigation {
+			@include menu-change-width(10em);
+			.menu
+			{
+				@include container(87%);
+			}
+			ul ul li:hover{
+				@include box-shadow(2px 2px 3px 0 #111 inset);
+			}
+		}
+	}
+
+	#colophon {
+		padding: 1em 2em 0;
+		@include border-top-radius(1em);
+		background-color: $basecolor;
+		.site-info{
+			clear: both;
+			@include double-gradient($similar, $basecolor);
+			padding: 0.5em 1em;
+			@include border-top-radius(.33em);
+		}
+		#footer-widget-area {
+			@include container(100%);
+			//@include multi-column-widgets(3);
+			aside {
+				@include multi-column-float(3);
+			}
+		}
+	}
+
+
+	.single #main article .entry-content {
+		>p:first-of-type{
+			@include drop-capitol;
+		}
+	}
+
+	.single-paged #main article .entry-content>p:first-of-type {
+		@include drop-capitol($size: 333%, $top: 16px, $right: 0);
+	}
+
+	.single #main article .entry-content, .single-paged #main article .entry-content {
+		h1, h2 {
+			+ p {
+				@include drop-capitol($size: 333%, $top: 16px, $right: 0);
+			}
+		}		
+	}
+
+	.single {
+		#page {
+			#primary {
+				#main {
+					article {
+						.entry-header {
+							@include container(90%);
+							h1.entry-title {
+								text-align: center;
+								margin: 3em 0 1em;
+								letter-spacing: 0.1em;
+							}
+						}
+						.entry-content {
+							@include container(80%);
+						}
+						#post_thumbnail {
+							display: block;
+							float: right;
+							min-width: 200px;
+							margin: 1em 0 1em 3em;
+							padding: 4px;
+							border: 1px solid #666;
+							@include box-shadow(4px 6px 8px 0 #666);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.single.single-paged #page #primary #main article {
+		#post_thumbnail
+		{
+			float: none;
+			border:none;
+			margin: 1em 0 1em 3em;
+			padding: 0;
+			@include box-shadow (0 0 0 0 transparent);
+			img {
+				display: block;
+				float: right;
+				@include box-shadow(3px 4px 6px 0 #888);
+			}
+		}
+	}
+
+	.plm_rating_table_container, .plm_rating_stack_container {
+		float: right;
+	}
+}
+@include breakpoint($medium-wide) {
+
+	#content {
+		@include container(940px);
+	}
+
+	#primary {
+		@include span(8);
+	}
+
+	#secondary-1, #secondary-2 {
+		clear:none;
+		@include span(4 at 9);
+	}
+
+	#colophon {
+		#footer-widget-area {
+			//@include multi-column-widgets(4);
+			aside {
+				@include multi-column-float(4);
+			}
+		}
+	}
+	.widget_calendar {
+		@include widget-calendar($calendar1, $calendar2, white, $calendar2, white, 1.5em, .1em .3em);
+	}
+
+	.major_holidays {
+		@include container(80%);
+	}
+
+	.page .entry-content {
+		@include container(100%);
+	}
+	.entry-content table.holiday_table {
+		width: 70%;
+		margin: 0 auto;
+	}
+}
+
+$mix-color: #eaeaea;
+@include breakpoint($wide-layout) {
+	@include layout($widelayoutmap);
+
+	body {
+		background-color: white;
+
+		@include background(linear-gradient(left, $mix-color , transparentize($mix-color, 1) 10%), 
+							linear-gradient(right, $mix-color, transparentize($mix-color, 1) 20%)
+							)
+	}
+	#content {
+		@include container(1160px);
+		padding: 1.5em 2em;
+		margin-bottom: 1em;
+		@include border-top-radius(0.5em);
+		@include border-bottom-radius(1em);
+		background-color: #fff;
+		@include box-shadow(4px 4px 8px 0 #666 inset);
+
+	}
+
+	#colophon {
+		@include box-shadow(3px 3px 5px 0 #777 inset);
+	}
+
+	.major_holidays {
+		@include container(100%);
+	}
+
+	.single, .page {
+		blockquote, q {
+			margin: 1em 8em 0;
+			p {
+				font-size: 1.25em;
+			}
+		}
+	}
+
+	#colophon {
+		@include container(87.5%);
+	}
+
+	#masthead {
+		.site-branding {
+			@include container(90%);
+			.site-title {
+				clear: none;
+				@include span(6 of 12 at 7);
+			}
+			.site-description {
+				clear: none;
+				margin-top: 0.5em;
+				@include span(6 of 12);
+				text-align: left;
+			}
+		}
+		#site-navigation {
+			@include menu-change-width(11em);
+			.menu 
+			{
+				width: 87.5%;
+				margin: 0 auto;
+			}
+		}
+	}
+
+	#primary {
+		@include span(18 at 7);
+	}
+
+	#secondary-1, #secondary-2 {
+		clear: left;
+		@include span(6);
+	}
+	#colophon #footer-widget-area aside {
+		@include multi-column-float(5);
+	}
+
+	#colophon .site-info {
+		@include box-shadow(3px 2px 4px 0 #666);
+	}
+
+	@include double-file(5);
+
+	article {
+		.entry-header {
+			border-top: 1px dotted #666; 
+			padding-top: 1em; 
+		}
+		
+		&:first-of-type, &:nth-of-type(2) {
+			.entry-header {
+				border-top: none;
+			}
+		}
+	}
+
+}
+@include breakpoint($xwide-layout) {
+	//@include triple-file(6);
+
+/*	article {
+		.entry-header {
+			border-top: none;
+		}
+	}
+*/
+	#content {
+		@include container(1720px);
+	}
+	#primary {
+		clear:both;
+		@include span(14);
+	}
+	#secondary-2 {
+		clear: none;
+		@include span(5 at 20);
+	}
+	#secondary-1 {
+		clear: none;
+		@include span(5 at 15);
+	}
+/*
+	#second-widget-area, #third-widget-area {
+		@include container(100%);
+		@include multi-column-widgets(2,4);
+	}
+*/
+
+
+	#colophon {
+		#footer-widget-area aside {
+			@include multi-column-float(6);
+		}
+	}
+}
+
+@include breakpoint($xxwide-layout) {
+	#content {
+		@include container(2380px);
+	}
+}

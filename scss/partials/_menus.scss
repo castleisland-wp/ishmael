@@ -1,0 +1,97 @@
+@mixin menu($width: u(8rem), $barcolor: transparent, $bartext: #000, $backcolor: #000, 
+					$highlight: #333, $textcolor: #eee, $texthilight: #fff, $pad: u(0.3rem), $top: 34px) {
+	background-color: $barcolor;
+	a {
+		display:block;
+	}
+	ul {
+		li {
+			a {
+				color: $bartext;
+				&:visited {
+					color: $bartext;
+				}
+			}
+			width: $width;
+			font-size: 100%;
+			padding: $pad;
+			&:hover {
+				color: $texthilight;
+				background-color: $backcolor;
+				> a {
+					color: $textcolor;
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+			ul {
+				min-width: $width;
+				top: $top;
+				background-color: $backcolor;
+				padding: u(0 0 0.25rem);
+				li {
+					a {
+						height: auto;
+						color: $textcolor;
+						&:visited {
+							color: $textcolor;
+						}
+					}
+					word-wrap: break-word;
+					padding: u(0.5rem);
+					&:hover {
+						background-color: $highlight;
+						color: $texthilight;
+					}
+					ul {
+						top: 0;
+						left: 100%;
+						ul {
+							left: 100%
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin menu-change-width($width: u(9rem)) {
+	ul {
+		li {
+			width: $width;
+		}
+	}
+}
+@mixin menu-has-child($entity: '\0020 \00BB') {
+	 ul {
+	 	ul {
+			 .menu-item-has-children {
+			 	> a {
+					&:after {
+						content: $entity;
+					}
+			 	}
+			}
+	 	}
+	 }
+}
+
+@mixin hide-home {
+	.home {
+		#masthead {
+			ul > .current-menu-item {
+				display: none;
+			}
+		}
+	}
+}
+
+@mixin hide-second-level-same {
+	#masthead ul ul {
+		> .current-menu-item {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,21 @@
+$basecolor: #fcf0f0;
+$light: lightness($basecolor);
+//$contrast: invert($basecolor);
+
+@if $light >= 50 {
+	$contrast: darken($basecolor, 33) !global;
+	$similar: lighten($basecolor,100 - (100 - ($light/2))) !global;
+} @else {
+	$contrast: lighten($basecolor, 33) !global;
+	$similar: darken($basecolor, $light/2) !global;
+}
+
+$menu1: change-color($basecolor, $lightness: 25%);
+$menu2: adjust-color($menu1, $saturation: 20%, $lightness: -5%);
+$calendar1: change-color($basecolor, $lightness: 98%);
+$calendar2: change-color($basecolor, $lightness: 10%);
+$titlecolor: change-color($basecolor, $lightness: 15%);
+$link: change-color($basecolor, $lightness: 15%);
+$hover: change-color($basecolor, $lightness: 33%);
+$visited: change-color($basecolor, $lightness: 15%, $saturation: 5%);
+$shadowcolor: change-color($basecolor, $lightness: 67%, $saturation: 10%);

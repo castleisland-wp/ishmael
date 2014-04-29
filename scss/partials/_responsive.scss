@@ -1,0 +1,24 @@
+$medium-layout: 45rem;
+$medium-wide: 60rem;
+$wide-layout: 80rem;
+$xwide-layout: 120rem;
+$xxwide-layout: 150rem;
+
+$susy: (
+	columns: 12,
+	gutters: 1/2,
+	math: fluid,
+	output: float,
+	gutter-position: inside,
+);
+
+$widelayoutmap: 24 4/5 fluid float inside;
+
+$xwidelayoutmap: (
+	container: auto,
+	columns: 24,
+	column-width: 120px,
+	math: static,
+	gutter-position: after,
+	output: float,
+);
